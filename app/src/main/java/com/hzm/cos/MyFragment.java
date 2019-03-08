@@ -1,13 +1,13 @@
 package com.hzm.cos;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -15,47 +15,59 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main3Activity extends AppCompatActivity {
+/**
+ * @author chenlulu@qiyi.com
+ * @Description
+ * @date 2019-03-08 12:28
+ */
+
+public class MyFragment extends Fragment {
     protected RecyclerView mRcv;
     EAdapter mEAdapter;
     List<ItemBean> mList = new ArrayList<>();
 
-    public static void startToMe(Context ctx) {
-        Intent intent = new Intent(ctx, Main3Activity.class);
-        ctx.startActivity(intent);
+    private View mRootView;
+
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        mRootView = inflater.inflate(R.layout.activity_main3, null);
+        return mRootView;
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        super.setContentView(R.layout.activity_main3);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initView();
+    }
 
-        mRcv = (RecyclerView) findViewById(R.id.rcv);
-        mRcv.setLayoutManager(new LinearLayoutManager(this));
+    private void initView(){
+        mRcv = (RecyclerView) mRootView.findViewById(R.id.rcv);
+        mRcv.setLayoutManager(new LinearLayoutManager(getActivity()));
         mEAdapter = new EAdapter(mList);
         mEAdapter.openLoadAnimation();
         mRcv.setAdapter(mEAdapter);
+        mRcv.setNestedScrollingEnabled(false);
         createData();
 
         mEAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(Main3Activity.this, MeizuActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.in_from_up, android.R.anim.fade_out);
             }
         });
     }
 
 
-    private void createData(){
-        for (int i=0;i<20;i++) {
-            ItemBean itemBean=new ItemBean();
-            itemBean.setName("第"+i+"个");
+
+    private void createData() {
+        for (int i = 0; i < 200; i++) {
+            ItemBean itemBean = new ItemBean();
+            itemBean.setName("第" + i + "个");
             mList.add(itemBean);
         }
 
-        if (mEAdapter!=null) mEAdapter.notifyDataSetChanged();
+        if (mEAdapter != null) mEAdapter.notifyDataSetChanged();
 
     }
 
@@ -70,7 +82,6 @@ public class Main3Activity extends AppCompatActivity {
             helper.setText(R.id.tv, item.getName());
         }
     }
-
 
 
 }

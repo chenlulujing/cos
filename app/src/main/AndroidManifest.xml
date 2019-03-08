@@ -21,7 +21,10 @@
         <activity android:name=".Main3Activity">
         </activity>
         <activity android:name=".MeizuActivity"
-               android:theme="@style/NoTitleTranslucentTheme">
+               android:theme="@style/NoTitleTranslucentTheme"
+
+
+            >
         </activity>
     </application>
 

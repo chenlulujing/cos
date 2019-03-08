@@ -16,18 +16,17 @@
         android:background="@android:color/white"
         app:layout_behavior="com.hzm.cos.RcvBehavior"
         >
-        <TextView
-            android:id="@+id/tv"
+        <FrameLayout
+            android:id="@+id/container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/large_text"
-            />
+            android:layout_height="match_parent"></FrameLayout>
     </android.support.v4.widget.NestedScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/bar_height"
         android:orientation="horizontal"
+        android:visibility="gone"
         android:background="@android:color/white">
         <ImageView
             android:id="@+id/back"
